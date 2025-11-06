@@ -1,37 +1,32 @@
-name: Test
+name: Testing 
 
-on: 
+on:
   push:
     branches:
-      - master
-  
+       master
   pull_request:
     branches:
-      - master
+       master
 
 jobs:
-  Testing:
-    runs-on: windows-latest
+  testing:
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v2
 
       - name: Install dependencies
         run: |
-          pip install pytest
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
-      - name: Run tests
-        run: |
-          pytest
+      - name: Run tests v1
+        run: python -m unittest test_calculator.py
 
   deploy:
-    needs: Testing
-    runs-on: windows-latest
+    needs: testing
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Deploy application
-        run: Test
+      - name: Dep
+        run: echo "Deployment successful!"
