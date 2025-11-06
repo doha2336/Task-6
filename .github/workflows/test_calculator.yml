@@ -3,7 +3,6 @@ name: test_calculator
 on:
   push:
     branches:
-      - main  # بيتفعل لما تعملي push على فرع main
 
 jobs:
   build:
