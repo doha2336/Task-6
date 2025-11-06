@@ -3,11 +3,11 @@ name: Test
 on: 
   push:
     branches:
-      - main
+      - master
   
   pull_request:
     branches:
-      - main
+      - master
 
 jobs:
   Testing:
@@ -24,3 +24,14 @@ jobs:
       - name: Run tests
         run: |
           pytest
+
+  deploy:
+    needs: Testing
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Deploy application
+        run: Test
